@@ -12,8 +12,4 @@ cd ..
 cd GDD
 cp ~/GodotGames/TemplateGDD.odt -t .
 cd ..
-git init
 cp ~/Desktop/.gitignore -t .
-git add .
-git commit
-
