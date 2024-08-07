@@ -98,6 +98,7 @@ func forward_1() -> void:
 			value = GlobalVars.red
 			
 	## TODO well, I have change, but it changes it to all white. bedtime
+	# why you now work right
 	for key: int in GlobalVars.block_color_dict:
 		var value: Color = temp_color_dict[key]
 		var inst: Object = instance_from_id(key)
