@@ -65,45 +65,55 @@ func draw_block() -> void:
 
 		add_child(new_block)
 
-		block_number += 1	
+		block_number += 1
 		
 func new_box_spawn_info(block_id: int) -> void:
+	# modulate is the key to changing colors, not color oddly
 	var inst: Object = instance_from_id(block_id)
 	GlobalVars.block_number_dict[block_id] = block_number
 	GlobalVars.block_color_dict[block_id] = inst.modulate
 	GlobalVars.block_position_dict[block_id] = inst.position
-	#print(
-	#	block_id, "\t",
-	#	GlobalVars.block_color_dict[block_id], "\t",
-	#	GlobalVars.block_number_dict[block_id], "\t",
-	#	GlobalVars.block_position_dict[block_id], "\t",
-	#)	
+	
+	GlobalVars.block_id.append(block_id)
+	if inst.modulate == GlobalVars.gray:
+		GlobalVars.block_on_off.append(2)
+	elif inst.modulate == GlobalVars.white:
+		GlobalVars.block_on_off.append(0)
+	elif inst.modulate == GlobalVars.red:
+		GlobalVars.block_on_off.append(1)
+
 		
 func change_color(block_id: int) -> void:
+	# when clicked in area, changes color based on current area color
 	var inst: Object = instance_from_id(block_id)
-
-	if inst.modulate == GlobalVars.white:
+	
+	var block_id_find: int = GlobalVars.block_id.find(block_id)
+	
+	if GlobalVars.block_on_off[block_id_find] == 0:
 		inst.modulate = GlobalVars.red
-	elif inst.modulate == GlobalVars.red:
+		GlobalVars.block_on_off[block_id_find] = 1
+	elif GlobalVars.block_on_off[block_id_find] == 1:
 		inst.modulate = GlobalVars.white
+		GlobalVars.block_on_off[block_id_find] = 0
+		
 		
 func forward_1() -> void:
-	var temp_number_dict: Dictionary = GlobalVars.block_number_dict.duplicate()
-	var temp_color_dict: Dictionary = GlobalVars.block_color_dict.duplicate()
-	var temp_position_dict: Dictionary = GlobalVars.block_number_dict.duplicate()
+	## TODO actualy program logic
+	# need all squares surrounding; 8 variables 
+	# current pos +1, -1, +9, -9, +10, -10, +11, -11
+	# Oh my gawd it actually changes colors lawd in heaven
+	# for skipping forward one step in time
 	
-	for key: int in temp_color_dict:
-		var value: Color = temp_color_dict[key]
-		if value == GlobalVars.white:
-			value = GlobalVars.red
-			
-	## TODO well, I have change, but it changes it to all white. bedtime
-	# why you now work right
-	for key: int in GlobalVars.block_color_dict:
-		var value: Color = temp_color_dict[key]
-		var inst: Object = instance_from_id(key)
-		inst.modulate = value
-
-
-
+	var block_on_off_copy: Array = []
 	
+	for i: int in range(0, 380):
+		if i <= 20:
+			block_on_off_copy.append(GlobalVars.block_on_off[i])
+		else:
+			# block being worked on
+			var f1: int = GlobalVars.block_on_off[i + 1]
+			var b1: int = GlobalVars.block_on_off[i - 1]
+			#print(GlobalVars.block_id[i], "\t", f1, "\t", b1, "\t", GlobalVars.block_on_off[i])
+				
+		
+
