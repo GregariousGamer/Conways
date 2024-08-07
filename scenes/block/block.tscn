@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu37g8oy8fsi8"]
+
+[ext_resource type="Script" path="res://entities/environment/block/block.gd" id="1_odo35"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6461e"]
+size = Vector2(16, 16)
+
+[node name="Block" type="ColorRect"]
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2
+script = ExtResource("1_odo35")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_6461e")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
