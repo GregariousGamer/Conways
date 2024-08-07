@@ -38,7 +38,32 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("step_1"):
 		forward_1()
+	if Input.is_action_just_pressed("forward_5"):
+		ten_cycles()
+		
+func ten_cycles() -> void:
+	wait(0.45)
 
+func wait(seconds: float) -> void:
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
 	
 func draw_block() -> void:
 	for i in range(400):
@@ -102,7 +127,7 @@ func change_color(block_id: int) -> void:
 		GlobalVars.block_on_off[block_id_find] = 0
 		GlobalVars.block_color[block_id_find] = GlobalVars.white
 		
-	print(block_id, "\t", block_id_find, "\t", block_num)
+	#print(block_id, "\t", block_id_find, "\t", block_num)
 		
 		
 func forward_1() -> void:
