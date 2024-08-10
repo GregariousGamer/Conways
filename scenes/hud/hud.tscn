@@ -1,7 +1,40 @@
-[gd_scene format=3 uid="uid://c82nu60qhvaqf"]
+[gd_scene load_steps=2 format=3 uid="uid://c82nu60qhvaqf"]
+
+[ext_resource type="Theme" uid="uid://c6uhlx30880nd" path="res://assets/materials/button_theme.tres" id="1_xe0po"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="OneStepButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_xe0po")
+text = "ONE"
+
+[node name="FiveStepButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_xe0po")
+text = "FIVE"
+
+[node name="TenStepButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_xe0po")
+text = "TEN"
