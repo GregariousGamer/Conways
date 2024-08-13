@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var block: PackedScene
+@export var hud: PackedScene
 
 # spawn positions
 var spawn_position_x: Array[int] = [
@@ -18,6 +19,9 @@ var block_number: int
 # block variables
 var new_block: ColorRect
 
+# hud vars
+var new_hud: Control
+
 var gray_blocks: Array[int] = [
 	20, 39, 40, 59,
 	60, 79,	80, 99,
@@ -31,20 +35,43 @@ var gray_blocks: Array[int] = [
 	]
 	
 func _ready() -> void:
+	new_hud = hud.instantiate()
+	new_hud.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	new_hud.position.x = 170
+	new_hud.position.y = 340
+	add_child(new_hud)
+	
 	SignalManager.connect("new_box_spawn", new_box_spawn_info)
 	SignalManager.connect("change_color", change_color)
+	SignalManager.connect("forward_one", forward_one)
+	SignalManager.connect("forward_five", forward_five)
+	SignalManager.connect("forward_ten", forward_ten)
 	draw_block()
-	
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("step_1"):
-		forward_1()
-	if Input.is_action_just_pressed("forward_5"):
-		ten_cycles()
 		
-func ten_cycles() -> void:
-	wait(0.45)
+func forward_one() -> void:
+	wait_one()
+	
+func forward_five() -> void:
+	wait_five(0.45)
+		
+func forward_ten() -> void:
+	wait_ten(0.45)
 
-func wait(seconds: float) -> void:
+func wait_one() -> void:
+	forward_1()
+	
+func wait_five(seconds: float) -> void:
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+	await get_tree().create_timer(seconds).timeout
+	forward_1()
+
+func wait_ten(seconds: float) -> void:
 	forward_1()
 	await get_tree().create_timer(seconds).timeout
 	forward_1()

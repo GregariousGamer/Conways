@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c82nu60qhvaqf"]
+[gd_scene load_steps=3 format=3 uid="uid://c82nu60qhvaqf"]
 
-[ext_resource type="Theme" uid="uid://c6uhlx30880nd" path="res://assets/materials/button_theme.tres" id="1_xe0po"]
+[ext_resource type="Script" path="res://UI/HUD/hud.gd" id="1_m1nmr"]
+[ext_resource type="Theme" uid="uid://dq4lsbkorkxn3" path="res://assets/materials/button_theme.tres" id="1_xe0po"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -10,6 +11,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_m1nmr")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -38,3 +42,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_xe0po")
 text = "TEN"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/OneStepButton" to="." method="_on_one_step_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/FiveStepButton" to="." method="_on_five_step_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/TenStepButton" to="." method="_on_ten_step_button_pressed"]
