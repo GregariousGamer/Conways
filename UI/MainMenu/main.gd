@@ -142,8 +142,6 @@ func change_color(block_id: int) -> void:
 	
 	var block_id_find: int = GlobalVars.block_id.find(block_id)
 	
-	var block_num: int = GlobalVars.block_number.find(block_id_find)
-	
 	if GlobalVars.block_on_off[block_id_find] == 0:
 		inst.modulate = GlobalVars.red
 		GlobalVars.block_color[block_id_find] = GlobalVars.red
@@ -165,7 +163,7 @@ func forward_1() -> void:
 	# for skipping forward one step in time
 	
 	var block_on_off_temp: Array = []
-	var count: int
+	var count: int = 0
 	
 	for i: int in range(0, 400):
 
@@ -174,7 +172,7 @@ func forward_1() -> void:
 			
 		elif (count < 379
 		&& !gray_blocks.has(count)):
-			var alive_count: int
+			var alive_count: int = 0
 			# block being worked on
 			var f1: int = GlobalVars.block_on_off[i + 1]
 			var b1: int = GlobalVars.block_on_off[i - 1]
